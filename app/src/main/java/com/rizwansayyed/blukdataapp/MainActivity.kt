@@ -1,8 +1,9 @@
 package com.rizwansayyed.blukdataapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.rizwansayyed.bulkapp.BulkData
+import androidx.appcompat.app.AppCompatActivity
+import com.rizwansayyed.bulkdata.BulkData
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,8 +12,17 @@ class MainActivity : AppCompatActivity() {
 
         val arrayTableName = ArrayList<String>()
         arrayTableName.add("name")
+        arrayTableName.add("userdata")
+        arrayTableName.add("username")
 
+        val InsertData = ArrayList<String>()
+        arrayTableName.add("name")
+        arrayTableName.add("userdata")
+        arrayTableName.add("username")
 
-        BulkData.makeTableColoum()
+        BulkData.makeTableColoum(this, arrayTableName)
+
+        BulkData.insertData(this, 500)
+
     }
 }

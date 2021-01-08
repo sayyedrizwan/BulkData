@@ -1,4 +1,4 @@
-package com.rizwansayyed.bulkapp
+package com.rizwansayyed.bulkdata
 
 import org.junit.Test
 
