@@ -1,0 +1,3 @@
+include ':bulkapp'
+include ':app'
+rootProject.name = "BlukData"
