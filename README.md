@@ -21,6 +21,7 @@ Note:- Callbacks will be added and make avaliable in upcoming releases.
 
 
 <br/>
+
 Gradle Dependency
 ---------
 
@@ -54,6 +55,7 @@ Maven Dependency
 ```
 
 <br/>
+
 Make / Add New Columns
 ---------
 
@@ -74,6 +76,7 @@ BulkData.makeNewTableColumn(this, arrayTableName)
 
 
 <br/>
+
 Alter / Add New Columns
 ---------
 
@@ -93,13 +96,15 @@ BulkData.makeTableColumn(this, arrayTableName)
 ```
 
 <br/>
+
 Insert Data
 ---------
 
 Insert data or any amount of data you want to add.
 
 ```kotlin
-BulkData.insertData(this, 999,"'Rizwan Sayyed', 'sayyedrizwanahmed@gmail.com', 'mumbai India', 'skating'")
+BulkData.insertData(this, 999,
+        "'Rizwan Sayyed', 'sayyedrizwanahmed@gmail.com', 'mumbai India', 'skating'")
 
 /* the first field is of context */
 /* the second field is of number of value that you want to insert */
@@ -113,6 +118,7 @@ BulkData.insertData(this, 999,"'Rizwan Sayyed', 'sayyedrizwanahmed@gmail.com', '
 
 
 <br/>
+
 Get whole data in JSON format
 ---------
 
