@@ -2,18 +2,29 @@ package com.rizwansayyed.bulkdata
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
-import android.database.Cursor
-import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.concurrent.schedule
 
 
 class BulkData() {
 
     companion object {
+
+        fun makeNewTableColoum(context: Context, arrayList: ArrayList<String>) {
+
+            clearAllData(context)
+
+            Timer().schedule(1500) {
+                makeTableColoum(context, arrayList)
+            }
+        }
 
         fun makeTableColoum(context: Context, arrayList: ArrayList<String>) {
 
@@ -113,14 +124,13 @@ class BulkData() {
                     mydatabase.execSQL("INSERT INTO bulkdataforapp ($coloumName) VALUES (NULL, $data)");
                 }
 
-                returnVal = "0"
+                returnVal = "1"
 
             } else {
                 returnVal = "itemLenght should be more than 0"
             }
             return returnVal;
         }
-
 
         fun getData(context: Context, query: String): String {
             val myDataBase =
@@ -131,33 +141,69 @@ class BulkData() {
             if (query == "ASC" || query == "asc" || query == "DESC" || query == "desc") {
                 searchQuery = "SELECT * FROM bulkdataforapp ORDER BY bkid $query"
             }
+            try {
+                val cursor = myDataBase.rawQuery(searchQuery, null)
 
-            val cursor = myDataBase.rawQuery(searchQuery, null)
+                val resultSet = JSONArray()
 
-            val resultSet = JSONArray()
-
-            cursor.moveToFirst()
-            while (!cursor.isAfterLast) {
-                val totalColumn = cursor.columnCount
-                val rowObject = JSONObject()
-                for (i in 0 until totalColumn) {
-                    if (cursor.getColumnName(i) != null) {
-                        try {
-                            if (cursor.getString(i) != null) {
-                                rowObject.put(cursor.getColumnName(i), cursor.getString(i))
-                            } else {
-                                rowObject.put(cursor.getColumnName(i), "")
+                cursor.moveToFirst()
+                while (!cursor.isAfterLast) {
+                    val totalColumn = cursor.columnCount
+                    val rowObject = JSONObject()
+                    for (i in 0 until totalColumn) {
+                        if (cursor.getColumnName(i) != null) {
+                            try {
+                                if (cursor.getString(i) != null) {
+                                    rowObject.put(cursor.getColumnName(i), cursor.getString(i))
+                                } else {
+                                    rowObject.put(cursor.getColumnName(i), "")
+                                }
+                            } catch (e: Exception) {
+                                Log.d("TAG_NAME", e.message!!)
                             }
-                        } catch (e: Exception) {
-                            Log.d("TAG_NAME", e.message!!)
                         }
                     }
+                    resultSet.put(rowObject)
+                    cursor.moveToNext()
                 }
-                resultSet.put(rowObject)
-                cursor.moveToNext()
+                cursor.close()
+
+                return resultSet.toString()
+
+            } catch (e: SQLiteException) {
+                return "notablefound use makeTableColoum"
             }
-            cursor.close()
-            return resultSet.toString()
+        }
+
+        fun clearAllData(context: Context): String {
+            val myDataBase =
+                context.openOrCreateDatabase("bulkdataforapp", MODE_PRIVATE, null)
+
+            myDataBase.execSQL("DELETE FROM bulkdataforapp");
+
+            myDataBase.execSQL("DELETE FROM bulkdataforappcoloums");
+
+            return "0"
+        }
+
+        fun dropData(context: Context): String {
+            val myDataBase =
+                context.openOrCreateDatabase("bulkdataforapp", MODE_PRIVATE, null)
+
+            myDataBase.execSQL("DROP TABLE bulkdataforapp");
+
+            myDataBase.execSQL("DROP TABLE bulkdataforappcoloums");
+
+            return "0"
+        }
+
+        fun dropColoum(context: Context, coloumNmae: String): String {
+            val myDataBase =
+                context.openOrCreateDatabase("bulkdataforapp", MODE_PRIVATE, null)
+
+            myDataBase.execSQL("ALTER TABLE bulkdataforapp DROP COLUMN $coloumNmae");
+
+            return "0"
         }
 
 

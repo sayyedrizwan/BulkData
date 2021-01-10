@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:weightSum="10"
     android:layout_height="match_parent"
     android:background="@android:color/white"
+    android:orientation="vertical"
+    android:weightSum="10"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topCard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
-        android:id="@+id/topCard">
+        android:layout_weight="2">
 
         <TextView
             android:id="@+id/toptext"
@@ -30,19 +30,19 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatEditText
-            android:gravity="center_horizontal"
+            android:id="@+id/submittext"
             style="@style/TextAppearance.AppCompat.Small"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:id="@+id/submittext"
+            android:background="@drawable/rounded_edittext"
+            android:gravity="center_horizontal"
+            android:hint="Enter value you want to insert data (1 ~ ∞)"
+            android:imeOptions="actionDone"
             android:inputType="number"
             android:singleLine="true"
-            android:textColorHint="@android:color/white"
-            android:imeOptions="actionDone"
-            android:background="@drawable/rounded_edittext"
-            android:hint="Enter value you want to insert data (1 ~ ∞)"
             android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toptext" />
@@ -50,12 +50,134 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="8"
         android:background="@drawable/rounded_cardview">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/makecoloum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/rounded_card"
+                android:gravity="center"
+                android:text="Make / Add coloum table."
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/getcoloumname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/rounded_card"
+                android:gravity="center"
+                android:text="Get Coloum Names"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/makecoloum" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/getwholedata"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/rounded_card"
+                android:gravity="center"
+                android:text="Return Whole Data"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/getcoloumname" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/getwholedataasc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/rounded_card"
+                android:gravity="center"
+                android:text="Return Data (ASC)"
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/getwholedata" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/getwholedatadesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/rounded_card"
+                android:gravity="center"
+                android:text="Return Data (DESC)"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/getwholedata" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/inqueryformat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/rounded_card"
+                android:gravity="center"
+                android:text="Return Data using query."
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/getwholedataasc" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/removecoloum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/rounded_card"
+                android:gravity="center"
+                android:text="Remove a Column"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inqueryformat" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/deleteall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/rounded_card"
+                android:gravity="center"
+                android:text="Clear All Data"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/removecoloum" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/dropall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/rounded_card"
+                android:gravity="center"
+                android:text="Drop Whole Data"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/deleteall" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
