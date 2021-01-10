@@ -17,19 +17,19 @@ class BulkData() {
 
     companion object {
 
-        fun makeNewTableColoum(context: Context, arrayList: ArrayList<String>) {
+        fun makeNewTableColumn(context: Context, arrayList: ArrayList<String>) {
 
             clearAllData(context)
 
             Timer().schedule(1500) {
-                makeTableColoum(context, arrayList)
+                makeTableColumn(context, arrayList)
             }
         }
 
-        fun makeTableColoum(context: Context, arrayList: ArrayList<String>) {
+        fun makeTableColumn(context: Context, arrayList: ArrayList<String>) {
 
             arrayList.add(0, "bkid")
-            val arrayListColoums = arrayList.toString().replace("[", "").replace("]", "")
+            val arrayListColumns = arrayList.toString().replace("[", "").replace("]", "")
 
             val mydatabase =
                 context.openOrCreateDatabase("bulkdataforapp", MODE_PRIVATE, null)
@@ -37,23 +37,23 @@ class BulkData() {
             mydatabase.execSQL("CREATE TABLE IF NOT EXISTS bulkdataforapp(bkid INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL)");
 
 
-            mydatabase.execSQL("CREATE TABLE IF NOT EXISTS bulkdataforappcoloums(bkcoloums LONGTEXT(1500000) NOT NULL)");
+            mydatabase.execSQL("CREATE TABLE IF NOT EXISTS bulkdataforappcolumns(bkcolumns LONGTEXT(1500000) NOT NULL)");
 
-            mydatabase.execSQL("DELETE FROM bulkdataforappcoloums");
-            mydatabase.execSQL("INSERT INTO bulkdataforappcoloums (bkcoloums) VALUES ('$arrayListColoums')");
+            mydatabase.execSQL("DELETE FROM bulkdataforappcolumns");
+            mydatabase.execSQL("INSERT INTO bulkdataforappcolumns (bkcolumns) VALUES ('$arrayListColumns')");
 
 
             for (i in arrayList) {
                 try {
                     mydatabase.execSQL("ALTER TABLE bulkdataforapp ADD COLUMN $i LONGTEXT(1500000);");
                 } catch (e: SQLiteException) {
-                    Log.d("Bulk", "makeTableColoum: columnexists")
+                    Log.d("Bulk", "makeTableColumn: columnexists")
                 }
             }
 
         }
 
-        fun getColoumsName(context: Context): String {
+        fun getColumnsName(context: Context): String {
 
             val myDataBase =
                 context.openOrCreateDatabase("bulkdataforapp", MODE_PRIVATE, null)
@@ -90,11 +90,11 @@ class BulkData() {
             cursor.close()
 
             if (resultSet.toString() == "[]") {
-                val newsearchQuery = "SELECT * FROM bulkdataforappcoloums LIMIT 1"
+                val newsearchQuery = "SELECT * FROM bulkdataforappcolumns LIMIT 1"
 
                 val newcursor = myDataBase.rawQuery(newsearchQuery, null)
                 if (newcursor.moveToFirst()) {
-                    return newcursor.getString(newcursor.getColumnIndex("bkcoloums"));
+                    return newcursor.getString(newcursor.getColumnIndex("bkcolumns"));
                 }
 
                 newcursor.close();
@@ -111,17 +111,17 @@ class BulkData() {
                 val mydatabase =
                     context.openOrCreateDatabase("bulkdataforapp", MODE_PRIVATE, null)
 
-                val coloumName = getColoumsName(context).replace("[{\"", "")
+                val columnName = getColumnsName(context).replace("[{\"", "")
                     .replace("\"}]", "").replace("\",\"", ",")
 
                 try {
-                    mydatabase.execSQL("INSERT INTO bulkdataforapp ($coloumName) VALUES (NULL, $data)");
+                    mydatabase.execSQL("INSERT INTO bulkdataforapp ($columnName) VALUES (NULL, $data)");
                 } catch (e: SQLiteException) {
-                    returnVal = "Table or Coloum not avaliable, Please run makeTableColoum."
+                    returnVal = "Table or Column not avaliable, Please run makeTableColumn."
                 }
 
                 for (i in 2..itemLenght) {
-                    mydatabase.execSQL("INSERT INTO bulkdataforapp ($coloumName) VALUES (NULL, $data)");
+                    mydatabase.execSQL("INSERT INTO bulkdataforapp ($columnName) VALUES (NULL, $data)");
                 }
 
                 returnVal = "1"
@@ -171,7 +171,7 @@ class BulkData() {
                 return resultSet.toString()
 
             } catch (e: SQLiteException) {
-                return "notablefound use makeTableColoum"
+                return "notablefound use makeTableColumn"
             }
         }
 
@@ -181,7 +181,7 @@ class BulkData() {
 
             myDataBase.execSQL("DELETE FROM bulkdataforapp");
 
-            myDataBase.execSQL("DELETE FROM bulkdataforappcoloums");
+            myDataBase.execSQL("DELETE FROM bulkdataforappcolumns");
 
             return "0"
         }
@@ -192,16 +192,16 @@ class BulkData() {
 
             myDataBase.execSQL("DROP TABLE bulkdataforapp");
 
-            myDataBase.execSQL("DROP TABLE bulkdataforappcoloums");
+            myDataBase.execSQL("DROP TABLE bulkdataforappcolumns");
 
             return "0"
         }
 
-        fun dropColoum(context: Context, coloumNmae: String): String {
+        fun dropColumn(context: Context, columnNmae: String): String {
             val myDataBase =
                 context.openOrCreateDatabase("bulkdataforapp", MODE_PRIVATE, null)
 
-            myDataBase.execSQL("ALTER TABLE bulkdataforapp DROP COLUMN $coloumNmae");
+            myDataBase.execSQL("ALTER TABLE bulkdataforapp DROP COLUMN $columnNmae");
 
             return "0"
         }

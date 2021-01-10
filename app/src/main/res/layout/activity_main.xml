@@ -61,30 +61,30 @@
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/makecoloum"
+                android:id="@+id/makecolumn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:background="@drawable/rounded_card"
                 android:gravity="center"
-                android:text="Make / Add coloum table."
+                android:text="Make / Add column table."
                 android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/getcoloumname"
+                android:id="@+id/getcolumnname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:background="@drawable/rounded_card"
                 android:gravity="center"
-                android:text="Get Coloum Names"
+                android:text="Get column Names"
                 android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/makecoloum" />
+                app:layout_constraintTop_toBottomOf="@id/makecolumn" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/getwholedata"
@@ -97,7 +97,7 @@
                 android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/getcoloumname" />
+                app:layout_constraintTop_toBottomOf="@id/getcolumnname" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/getwholedataasc"
@@ -138,7 +138,7 @@
                 app:layout_constraintTop_toBottomOf="@id/getwholedataasc" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/removecoloum"
+                android:id="@+id/removecolumn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -161,7 +161,7 @@
                 android:textColor="@android:color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/removecoloum" />
+                app:layout_constraintTop_toBottomOf="@id/removecolumn" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/dropall"

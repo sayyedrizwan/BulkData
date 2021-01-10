@@ -86,15 +86,15 @@ class MainActivity : AppCompatActivity() {
             dialog.show()
         }
 
-        val getcoloumname = findViewById<AppCompatTextView>(R.id.getcoloumname)
+        val getcolumname = findViewById<AppCompatTextView>(R.id.getcolumnname)
 
-        getcoloumname.setOnClickListener { v ->
+        getcolumname.setOnClickListener { v ->
             val dialog = BottomSheetDialog(this)
             dialog.setContentView(R.layout.bottomcustomlayout)
 
             val showtext = dialog.findViewById<AppCompatTextView>(R.id.showtext);
 
-            showtext!!.text = BulkData.getColoumsName(this)
+            showtext!!.text = BulkData.getColumnsName(this)
 
             dialog.show()
         }
@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        val makecoloum = findViewById<AppCompatTextView>(R.id.makecoloum)
+        val makecoloum = findViewById<AppCompatTextView>(R.id.makecolumn)
 
         makecoloum.setOnClickListener { v ->
 
@@ -124,13 +124,13 @@ class MainActivity : AppCompatActivity() {
             arrayTableName.add("interest")
 
 
-            BulkData.makeNewTableColoum(this, arrayTableName)
+            BulkData.makeNewTableColumn(this, arrayTableName)
         }
 
-        val removecoloum = findViewById<AppCompatTextView>(R.id.removecoloum)
+        val removecoloum = findViewById<AppCompatTextView>(R.id.removecolumn)
 
         removecoloum.setOnClickListener { v ->
-            BulkData.dropColoum(this, "place")
+            BulkData.dropColumn(this, "place")
         }
 
 
